@@ -1,15 +1,20 @@
 package com.example.demo.model;
 
 
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 
 //import jakarta.persistence.Column;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="Customer")
-public class Model {
+public class Customer {
 	@Id
 	//@Column(name="id")
 	private int id;
@@ -25,22 +30,28 @@ public class Model {
 	
 	//@Column(name="company")
 	private String company;
+   
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="productid")
+	private Opportunities cs;
 	
-	
-	
-
-	public Model() {
+    /*@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="brandid")
+    private List<Products> s;*/
+    
+	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-   
-	public Model(int id, String firstName, String lastName, String email, String company) {
+
+	public Customer(int id, String firstName, String lastName, String email, String company, Opportunities cs) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.company = company;
+		this.cs = cs;
 	}
 
 	public int getId() {
@@ -83,14 +94,19 @@ public class Model {
 		this.company = company;
 	}
 
+	public Opportunities getCs() {
+		return cs;
+	}
+
+	public void setCs(Opportunities cs) {
+		this.cs = cs;
+	}
 	
 
-/*@Override
-	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", company=" + company + "]";
-}*/
 
+	
+
+	
 	
 
 	

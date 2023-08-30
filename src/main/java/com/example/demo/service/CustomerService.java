@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Model;
+import com.example.demo.model.Customer;
 import com.example.demo.repository.CustomRepo;
 
 
@@ -14,36 +16,41 @@ import com.example.demo.repository.CustomRepo;
 public class CustomerService {
 	@Autowired
     CustomRepo sr;
-	public Model saveinfo(Model ss) {
+	public Customer saveinfo(Customer ss) {
  	   return sr.save(ss);
   }
-  public List<Model> showinfo()
+  public List<Customer> showinfo()
   {
  	 return sr.findAll();
   }
-  public List<Model> savedetails(List<Model> ss)
+  public List<Customer> savedetails(List<Customer> ss)
   {
- 	 return (List<Model>)sr.saveAll(ss);
+ 	 return (List<Customer>)sr.saveAll(ss);
   }
   //get
-  public Optional<Model> get(int id) {
+  public Optional<Customer> get(int id) {
 		
 		return sr.findById(id);
 	}
    
-	public Model changeinfo(Model ss) {
+	public Customer changeinfo(Customer ss) {
 		
 		return sr.saveAndFlush(ss);
 	}
-   public List<Model> change(List<Model> ss) {
+   public List<Customer> change(List<Customer> ss) {
 		
-		return (List<Model>)sr.saveAll(ss);
+		return (List<Customer>)sr.saveAll(ss);
 	}
-	public void deleteinfo(Model ss) {
+   public List<Customer> getPage(int pageno,int psize)
+	{
+		Page<Customer> p =sr.findAll(PageRequest.of(pageno,psize));
+		return p.getContent();
+	}
+	public void deleteinfo(Customer ss) {
 		
 		sr.delete(ss);
 	}
-	public Optional<Model> detail(int id)
+	public Optional<Customer> detail(int id)
 	{
 		return sr.findById(id);
 	}

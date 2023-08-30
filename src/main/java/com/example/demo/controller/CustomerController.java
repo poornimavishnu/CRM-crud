@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,44 +17,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Model;
+import com.example.demo.model.Customer;
 import com.example.demo.service.CustomerService;
 
 @RestController
-public class Control {
+public class CustomerController {
 	@Autowired
     CustomerService s;
     @PostMapping("addnew")
-    public Model add(@RequestBody Model ss)
+    public Customer add(@RequestBody Customer ss)
     {
    	 return s.saveinfo(ss);
     }
     @PostMapping("addstudent")
-    public List<Model> adddetails(@RequestBody List<Model> ss)
+    public List<Customer> adddetails(@RequestBody List<Customer> ss)
     {
    	 return s.savedetails(ss);
     }
     @GetMapping("showdetails")
-    public List<Model> show()
+    public List<Customer> show()
     {
    	 return s.showinfo();
     }
+    @GetMapping("paging/{pageno}/{psize}")
+	public List<Customer> showpagesortinfo(@PathVariable int pageno,@PathVariable int psize)
+	{
+		return s.getPage(pageno,psize);
+	}
     @GetMapping("getbyid/{id}")
-    public Optional<Model> get(@PathVariable int id)
+    public Optional<Customer> get(@PathVariable int id)
     {
     	return s.get(id);
     }
     @PutMapping("update") 
-    public Model modify(@RequestBody Model ss) 
+    public Customer modify(@RequestBody Customer ss) 
     { 
    	 return s.changeinfo(ss); 
-    } @PutMapping("update1")
-    public List<Model> changes(@RequestBody List<Model> ss)
+    }
+    @PutMapping("update1")
+    public List<Customer> changes(@RequestBody List<Customer> ss)
     {
    	 return s.savedetails(ss);
     }
     @DeleteMapping("delete") 
-    public String del(@RequestBody Model ss) 
+    public String del(@RequestBody Customer ss) 
     { 
    	 s.deleteinfo(ss); 
         return "Deleted Successfully"; 
