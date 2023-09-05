@@ -46,6 +46,7 @@ public class CustomerService {
 		Page<Customer> p =sr.findAll(PageRequest.of(pageno,psize));
 		return p.getContent();
 	}
+ 
 	public void deleteinfo(Customer ss) {
 		
 		sr.delete(ss);
@@ -58,9 +59,14 @@ public class CustomerService {
 		
 		sr.deleteById(id);
 	}
+    
    public void delp(int id) {
 		
 		sr.deleteById(id);
 	}
+      public void update(int id,int id1) {
+	// TODO Auto-generated method stub
+    	  sr.update2(id,id1);
+          }
    
 }

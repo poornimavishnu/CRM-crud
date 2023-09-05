@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 
@@ -9,7 +11,7 @@ import jakarta.persistence.Entity;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
@@ -35,16 +37,17 @@ public class Customer {
     @JoinColumn(name="productid")
 	private Opportunities cs;
 	
-    /*@OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="brandid")
-    private List<Products> s;*/
+    private List<Products> s;
     
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(int id, String firstName, String lastName, String email, String company, Opportunities cs) {
+	public Customer(int id, String firstName, String lastName, String email, String company, Opportunities cs,
+			List<Products> s) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -52,6 +55,7 @@ public class Customer {
 		this.email = email;
 		this.company = company;
 		this.cs = cs;
+		this.s = s;
 	}
 
 	public int getId() {
@@ -101,6 +105,19 @@ public class Customer {
 	public void setCs(Opportunities cs) {
 		this.cs = cs;
 	}
+
+	public List<Products> getS() {
+		return s;
+	}
+
+	public void setS(List<Products> s) {
+		this.s = s;
+	}
+     
+	
+	
+
+	
 	
 
 

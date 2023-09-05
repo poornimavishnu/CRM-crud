@@ -59,6 +59,11 @@ public class CustomerController {
     {
    	 return s.savedetails(ss);
     }
+    @PutMapping("update2/{id}/{id1}")
+    public void update2(@PathVariable int id,@PathVariable int id1)
+    {
+   	 s.update(id,id1);
+    }
     @DeleteMapping("delete") 
     public String del(@RequestBody Customer ss) 
     { 

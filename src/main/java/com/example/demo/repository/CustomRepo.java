@@ -15,6 +15,10 @@ public interface CustomRepo extends JpaRepository<Customer, Integer>{
 	public List<Customer> getOwner(@Param("o") int id);
 	@Modifying
 	@Transactional
-	@Query(value="delete from Customer where id:=0",nativeQuery=true)
-	public int deleteinfo(@Param("s") int id);
+	@Query(value="update Customer set id=?1 where id=?2",nativeQuery = true)
+	public int update2(int newid, int oldid);
+	@Modifying
+	@Transactional
+	@Query(value="delete from Customer where id:=o",nativeQuery=true)
+	public int deleteinfo(@Param("o") int oldid);
 }
